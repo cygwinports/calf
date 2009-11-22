@@ -1,0 +1,22 @@
+--- origsrc/calf-0.0.18.5/Makefile.am	2009-01-20 17:12:21.000000000 -0600
++++ src/calf-0.0.18.5/Makefile.am	2009-11-22 00:53:28.481161500 -0600
+@@ -4,13 +4,17 @@ SUBDIRS = $(SRCDIRS)
+ 
+ distdir = $(PACKAGE)-$(VERSION)
+ 
++dist_man_MANS = calf.7
++
++if USE_JACK
++dist_man_MANS += calfjackhost.1
++
+ desktopfilesdir = $(datadir)/applications
+ dist_desktopfiles_DATA = calf.desktop
++endif
+ 
+ EXTRA_DIST = COPYING.GPL TODO autogen.sh calf.glade presets.xml knob.png calf.7 calfjackhost.1
+ 
+-dist_man_MANS = calf.7 calfjackhost.1
+-
+ clean-local:
+ 	rm -f *~ *.old *.bak
+ 	rm -rf autom4te.cache

@@ -1,0 +1,30 @@
+--- origsrc/calf-0.0.18.5/src/Makefile.am	2009-05-20 17:06:26.000000000 -0500
++++ src/calf-0.0.18.5/src/Makefile.am	2009-11-22 00:58:31.559490000 -0600
+@@ -47,22 +47,22 @@ calfbenchmark_SOURCES = benchmark.cpp
+ calfdssigui_SOURCES = dssigui.cpp
+ calfdssigui_LDADD = libcalfstatic.la libcalfgui.la $(GLIB_DEPS_LIBS) $(GUI_DEPS_LIBS)
+ calfbenchmark_CXXFLAGS = $(AM_CXXFLAGS) -DTEST_OSC
+-calfbenchmark_LDADD += libcalfgui.la
++calfbenchmark_LDADD += libcalfgui.la $(GLIB_DEPS_LIBS)
+ endif
+ 
+ calf_la_SOURCES = modules.cpp modules_dsp.cpp modules_small.cpp giface.cpp monosynth.cpp organ.cpp osctl.cpp osctlnet.cpp plugin.cpp preset.cpp synth.cpp utils.cpp
+ if USE_DEBUG
+-calf_la_LDFLAGS = -rpath $(ladspadir) -avoid-version -module -lexpat -disable-static
++calf_la_LDFLAGS = -rpath $(ladspadir) -avoid-version -module -lexpat -disable-static -no-undefined -shrext ".so"
+ else
+-calf_la_LDFLAGS = -rpath $(ladspadir) -avoid-version -module -lexpat -disable-static -export-symbols-regex "(ladspa_|lv2_|dssi_)descriptor"
++calf_la_LDFLAGS = -rpath $(ladspadir) -avoid-version -module -lexpat -disable-static -export-symbols-regex "(ladspa_|lv2_|dssi_)descriptor" -no-undefined -shrext ".so"
+ endif
+ 
+ if USE_LV2_GUI
+ calflv2gui_la_SOURCES = gui.cpp ctl_curve.cpp ctl_keyboard.cpp ctl_led.cpp custom_ctl.cpp modules.cpp giface.cpp preset.cpp synth.cpp lv2gui.cpp main_win.cpp osctl.cpp osctlnet.cpp utils.cpp
+ if USE_DEBUG
+-calflv2gui_la_LDFLAGS = -rpath $(lv2dir) -avoid-version -module -lexpat $(GUI_DEPS_LIBS) -disable-static
++calflv2gui_la_LDFLAGS = -rpath $(lv2dir) -avoid-version -module -lexpat $(GUI_DEPS_LIBS) -disable-static -no-undefined -shrext ".so"
+ else
+-calflv2gui_la_LDFLAGS = -rpath $(lv2dir) -avoid-version -module -lexpat -export-symbols-regex "lv2_gui_descriptor" $(GUI_DEPS_LIBS) -disable-static
++calflv2gui_la_LDFLAGS = -rpath $(lv2dir) -avoid-version -module -lexpat -export-symbols-regex "lv2_gui_descriptor" $(GUI_DEPS_LIBS) -disable-static -no-undefined -shrext ".so"
+ endif
+ endif
+ 

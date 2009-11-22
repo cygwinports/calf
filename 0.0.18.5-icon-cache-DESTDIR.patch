@@ -1,0 +1,23 @@
+--- origsrc/calf-0.0.18.5/icons/Makefile.am	2009-01-27 16:16:15.000000000 -0600
++++ src/calf-0.0.18.5/icons/Makefile.am	2009-11-22 01:15:23.333985100 -0600
+@@ -4,13 +4,16 @@ SIZES = 16x16 24x24 32x32 48x48
+ install-data-hook:
+ 	-for fn in $(SIZES); do \
+ 		mkdir -p "$(DESTDIR)$(datadir)/icons/hicolor/$${fn}/apps/"; \
+-		cp "calf_$${fn}.png" "$(DESTDIR)$(datadir)/icons/hicolor/$${fn}/apps/calf.png"; \
++		cp "$(srcdir)/calf_$${fn}.png" "$(DESTDIR)$(datadir)/icons/hicolor/$${fn}/apps/calf.png"; \
+ 	done
+-	@-gtk-update-icon-cache -f -t $(DESTDIR)$(datadir)/icons/hicolor
++	@-if test -z "$(DESTDIR)"; then \
++		gtk-update-icon-cache -f -t $(datadir)/icons/hicolor; \
++	fi
+ 	
+ uninstall-hook:
+ 	@-for fn in $(SIZES); do \
+ 		rm -f "$(DESTDIR)$(datadir)/icons/hicolor/$${fn}/apps/calf.png"; \
+ 	done
+-	@-gtk-update-icon-cache -f -t $(DESTDIR)$(datadir)/icons/hicolor
+-	
++	@-if test -z "$(DESTDIR)"; then \
++		gtk-update-icon-cache -f -t $(datadir)/icons/hicolor; \
++	fi

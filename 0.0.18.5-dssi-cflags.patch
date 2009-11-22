@@ -1,0 +1,23 @@
+If libdssialsacompat is in use, its alsa headers won't be found w/o pkg-config.
+
+--- origsrc/calf-0.0.18.5/configure.ac	2009-05-20 17:09:03.000000000 -0500
++++ src/calf-0.0.18.5/configure.ac	2009-11-22 00:55:42.407395000 -0600
+@@ -28,7 +28,7 @@ AC_CHECK_HEADERS([memory.h stdint.h stdl
+ 
+ AC_CHECK_HEADER(ladspa.h, LADSPA_FOUND="yes", LADSPA_FOUND="no")
+ 
+-AC_CHECK_HEADER(dssi.h, DSSI_FOUND="yes", DSSI_FOUND="no")
++PKG_CHECK_MODULES(DSSI_DEPS, dssi, DSSI_FOUND="yes", DSSI_FOUND="no")
+ 
+ AC_CHECK_HEADER(expat.h, true, AC_MSG_ERROR([Expat XML library not found]))
+ AC_CHECK_LIB(expat, XML_Parse, true, AC_MSG_ERROR([Expat XML library not found]))
+--- origsrc/calf-0.0.18.5/src/Makefile.am	2009-05-20 17:06:26.000000000 -0500
++++ src/calf-0.0.18.5/src/Makefile.am	2009-11-22 00:58:31.559490000 -0600
+@@ -44,6 +44,7 @@ calfbenchmark_SOURCES = benchmark.cpp
+ calfbenchmark_LDADD = $(GLIB_DEPS_LIBS) libcalfstatic.la
+ 
+ if USE_DSSI_GUI
++AM_CXXFLAGS += $(DSSI_DEPS_CFLAGS)
+ calfdssigui_SOURCES = dssigui.cpp
+ calfdssigui_LDADD = libcalfstatic.la libcalfgui.la $(GLIB_DEPS_LIBS) $(GUI_DEPS_LIBS)
+ calfbenchmark_CXXFLAGS = $(AM_CXXFLAGS) -DTEST_OSC

@@ -1,0 +1,62 @@
+calf
+------------------------------------------
+The Calf project aims at providing a set of high quality open source 
+audio plugins for musicians. All the included plugins are designed to be 
+used with multitrack software, as software replacement for instruments 
+and guitar stomp boxes.
+
+Runtime requirements:
+  cygwin-1.7.0-64
+  libcairo2-1.8.8-1
+  libexpat1-2.0.1-1
+  libgcc1-4.3.4-1
+  libgdk_pixbuf2.0_0-2.18.3-1
+  libglib2.0_0-2.22.2-1
+  libgtk2.0_0-2.18.3-1
+  libstdc++6-4.3.4-1
+
+Build requirements:
+(besides corresponding -devel packages)
+  autoconf2.5-2.63-10
+  automake1.10-1.10.2-10
+  binutils-2.19.51-1
+  cygport-0.9.10-1
+  gawk-3.1.7-1
+  gcc4-core-4.3.4-1
+  gcc4-g++-4.3.4-1
+  libtool-2.2.7a-14
+  make-3.81-2
+  pkg-config-0.23b-10
+  sed-4.1.5-2
+
+Canonical website:
+  http://calf.sourceforge.net/
+
+Canonical download:
+  http://sourceforge.net/projects/calf/files/
+
+-------------------------------------------
+
+Build instructions:
+  unpack calf-0.0.18.5-X-src.tar.bz2
+    if you use setup to install this src package, it will be
+	 unpacked under /usr/src automatically
+  cd /usr/src
+  cygport ./calf-0.0.18.5-X.cygport all
+
+This will create:
+  /usr/src/calf-0.0.18.5-X-src.tar.bz2
+  /usr/src/calf-0.0.18.5-X.tar.bz2
+  /usr/src/ladspa-calf-0.0.18.5-X.tar.bz2
+  /usr/src/lv2-calf-0.0.18.5-X.tar.bz2
+
+-------------------------------------------
+
+Port Notes:
+
+----- version 0.0.18.5-1 -----
+Initial release for Cygwin 1.7.
+
+
+Cygwin port maintained by:
+http://sourceware.org/cygwinports/
